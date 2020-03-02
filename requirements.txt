@@ -1,4 +1,4 @@
-dcase_util>=0.2.10
+dcase_util>=0.2.11
 keras>=2.2.2
 tensorflow>=1.14.0
 absl-py>=0.9.0
