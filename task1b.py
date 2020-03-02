@@ -13,11 +13,9 @@ import numpy
 import os
 import sed_eval
 from task1a import do_feature_extraction, do_feature_normalization, do_learning, do_testing
+from model_size_calculation import get_keras_model_size
 from utils import *
 
-from model_size_calculation import get_keras_model_size
-
-from holdout import *
 
 __version_info__ = ('1', '0', '0')
 __version__ = '.'.join(__version_info__)

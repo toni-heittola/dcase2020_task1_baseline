@@ -13,8 +13,6 @@ import numpy
 import os
 import sed_eval
 from utils import *
-import holdout
-from holdout import *
 
 __version_info__ = ('1', '0', '0')
 __version__ = '.'.join(__version_info__)
