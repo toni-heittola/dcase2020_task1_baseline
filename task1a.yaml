@@ -62,9 +62,9 @@ sets:
 
 defaults:
   flow:
-    feature_extraction: false
-    feature_normalization: false
-    learning: false
+    feature_extraction: true
+    feature_normalization: true
+    learning: true
     testing: true
     evaluation: true
 
