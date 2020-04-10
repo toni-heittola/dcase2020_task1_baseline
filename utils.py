@@ -38,12 +38,12 @@ def handle_application_arguments(app_parameters, raw_parameters, application_tit
         formatter_class=argparse.RawDescriptionHelpFormatter,
         description=textwrap.dedent(
             '''\
-            DCASE 2018 
+            DCASE 2020 
             {app_title}
             Baseline system
             ---------------------------------------------            
-            Author:  Toni Heittola ( toni.heittola@tut.fi )
-            Tampere University of Technology / Audio Research Group
+            Author:  Toni Heittola ( toni.heittola@tuni.fi )
+            Tampere University / Audio Research Group
             '''.format(app_title=application_title)
         )
     )
