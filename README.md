@@ -48,7 +48,7 @@ Subtasks
 
 ### Subtask A - Acoustic Scene Classification with Multiple Devices
 
-[TAU Urban Acoustic Scenes 2020 Mobile Development dataset](https://zenodo.org/record/3670167) is used as development dataset for this task.
+[TAU Urban Acoustic Scenes 2020 Mobile Development dataset](https://zenodo.org/record/3819968) is used as development dataset for this task.
 
 This subtask is concerned with the basic problem of acoustic scene classification, in which it is required to classify a test audio recording into one of ten known acoustic scene classes. This task targets **generalization** properties of systems across a number of different devices, and will use audio data recorded and simulated with a variety of devices. 
 Recordings in the dataset were made with three devices (A, B and C) that captured audio simultaneously and 6 simulated devices (S1-S6). Each acoustic scene has 1440 segments (240 minutes of audio) recorded with device A (main device) and 108 segments of parallel audio (18 minutes) each recorded with devices B,C, and S1-S6. The dataset contains in total 64 hours of audio. For a more detailed description see [DCASE Challenge task description](http://dcase.community/challenge2020/task-acoustic-scene-classification).
@@ -87,17 +87,17 @@ The cross-validation setup provided with the *TAU Urban Acoustic Scenes 2020 Mob
 
 | Scene class        | Accuracy             | Log loss          |
 | ------------------ | -------------------- |-------------------|
-| Airport            | 43.6 %               | 1.693             |
-| Bus                | 61.5 %               | 1.019             |
-| Metro              | 54.6 %               | 1.263             |
-| Metro station      | 54.3 %               | 1.227             |
-| Park               | 71.0 %               | 1.026             |
-| Public square      | 43.0 %               | 1.658             |
-| Shopping mall      | 56.9 %               | 1.203             |
-| Street, pedestrian | 28.8 %               | 2.335             |
-| Street, traffic    | 78.6 %               | 0.809             |
-| Tram               | 53.6 %               | 1.326             |
-| **Average**        | **54.6 %** (+/- 1.5) | 1.356 (+/- 0.055) |
+| Airport            | 45.0 %               | 1.615             |
+| Bus                | 62.9 %               | 0.964             |
+| Metro              | 53.5 %               | 1.281             |
+| Metro station      | 53.0 %               | 1.298             |
+| Park               | 71.3 %               | 1.022             |
+| Public square      | 44.9 %               | 1.633             |
+| Shopping mall      | 48.3 %               | 1.482             |
+| Street, pedestrian | 29.8 %               | 2.277             |
+| Street, traffic    | 79.9 %               | 0.731             |
+| Tram               | 52.2 %               | 1.350             |
+| **Average**        | **54.1 %** (+/- 1.4) | 1.365 (+/- 0.032) |
 
 **Note:** The reported system performance is not exactly reproducible due to varying setups. However, you should be able obtain very similar results.
 
