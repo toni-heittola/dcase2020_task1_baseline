@@ -31,7 +31,7 @@ To setup Anaconda environment for the system use following:
     conda install -c anaconda cudnn
     conda install librosa
     pip install absl-py==0.9.0
-    pip install dcase_util==0.2.11
+    pip install dcase_util==0.2.12
     pip install sed_eval
 
 Introduction
