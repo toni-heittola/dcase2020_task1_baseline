@@ -1147,6 +1147,9 @@ def do_evaluation(db, folds, param, log, application_mode='default'):
     y_true_scene = {}
     y_pred_scene = {}
 
+    y_true_device = {}
+    y_pred_device = {}
+
     estimated_scene_items = {}
     for item in estimated_scene_list:
         estimated_scene_items[item.filename] = item
@@ -1174,12 +1177,31 @@ def do_evaluation(db, folds, param, log, application_mode='default'):
         y_true_scene[item.scene_label].append(scene_label_id)
         y_pred_scene[item.scene_label].append(item_probabilities)
 
+        if item.source_label not in y_true_device:
+            y_true_device[item.source_label] = []
+            y_pred_device[item.source_label] = []
+
+        y_true_device[item.source_label].append(scene_label_id)
+        y_pred_device[item.source_label].append(item_probabilities)
+
     from sklearn.metrics import log_loss
     logloss_overall = log_loss(y_true=y_true, y_pred=y_pred)
 
     logloss_class_wise = {}
     for scene_label in db.scene_labels():
-        logloss_class_wise[scene_label] = log_loss(y_true=y_true_scene[scene_label], y_pred=y_pred_scene[scene_label], labels=list(range(len(db.scene_labels()))))
+        logloss_class_wise[scene_label] = log_loss(
+            y_true=y_true_scene[scene_label],
+            y_pred=y_pred_scene[scene_label],
+            labels=list(range(len(db.scene_labels())))
+        )
+
+    logloss_device_wise = {}
+    for decice_label in list(y_true_device.keys()):
+        logloss_device_wise[decice_label] = log_loss(
+            y_true=y_true_device[decice_label],
+            y_pred=y_pred_device[decice_label],
+            labels=list(range(len(db.scene_labels())))
+        )
 
     results = evaluator.results()
     all_results.append(results)
@@ -1280,14 +1302,28 @@ def do_evaluation(db, folds, param, log, application_mode='default'):
     log.row_sep()
 
     # Last row
-    column_values = ['Average']
+    column_values = ['Accuracy']
     for value in overall:
         column_values.append(value*100.0)
-    column_values.append(logloss_overall)
+    column_values.append(' ')
 
     log.row(
         *column_values,
         types=column_types
+    )
+
+    column_values = ['Logloss', ' ']
+    column_types = ['str20', 'float3']
+    for device_label in devices:
+        column_values.append(logloss_device_wise[device_label])
+        column_types.append('float3')
+
+    column_values.append(logloss_overall)
+    column_types.append('float3')
+
+    log.row(
+        *column_values,
+        types=column_types,
     )
 
     log.line()
