@@ -47,20 +47,6 @@ def main(argv):
     # parameters where injected from command line.
     param.process()
 
-    if args.dataset_path:
-        # Download only dataset if requested
-
-        # Make sure given path exists
-        dcase_util.utils.Path().create(
-            paths=args.dataset_path
-        )
-        # Get dataset and initialize
-        dcase_util.datasets.dataset_factory(
-            dataset_class_name=param.get_path('dataset.parameters.dataset'),
-            data_path=args.dataset_path,
-        ).initialize().log()
-        sys.exit(0)
-
     if args.parameter_set:
         # Check parameter set ids given as program arguments
         parameters_sets = args.parameter_set.split(',')
@@ -79,6 +65,39 @@ def main(argv):
 
     else:
         application_mode = 'dev'
+
+    if args.dataset_path:
+        # Download only dataset if requested
+
+        # Make sure given path exists
+        dcase_util.utils.Path().create(
+            paths=args.dataset_path
+        )
+
+        for parameter_set in parameters_sets:
+            # Set parameter set
+            param['active_set'] = parameter_set
+            param.update_parameter_set(parameter_set)
+
+            if application_mode == 'eval':
+                eval_parameter_set_id = param.active_set() + '_eval'
+                if not param.set_id_exists(eval_parameter_set_id):
+                    raise ValueError(
+                        'Parameter set id [{set_id}] not found for eval mode.'.format(
+                            set_id=eval_parameter_set_id
+                        )
+                    )
+
+                # Change active parameter set
+                param.update_parameter_set(eval_parameter_set_id)
+
+            # Get dataset and initialize
+            dcase_util.datasets.dataset_factory(
+                dataset_class_name=param.get_path('dataset.parameters.dataset'),
+                data_path=args.dataset_path,
+            ).initialize().log()
+
+        sys.exit(0)
 
     # Get overwrite flag
     if overwrite is None:
