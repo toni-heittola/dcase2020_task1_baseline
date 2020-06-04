@@ -96,7 +96,7 @@ def get_keras_model_size(keras_model, verbose=True, ui=None, excluded_layers=Non
                 bytes = 64 / 8
 
             elif w.dtype in ['int8', 'uint8']:
-                bytes = 16 / 8
+                bytes = 8 / 8
 
             else:
                 print('UNKNOWN TYPE', w.dtype)
