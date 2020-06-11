@@ -989,6 +989,9 @@ def do_testing(db, scene_labels, folds, param, log, overwrite=False):
                 filename=fold_results_filename
             )
 
+            if not len(db.test(fold=fold)):
+                raise ValueError('Dataset did not return any test files. Check dataset setup.')
+
             # Loop through all test files from the current cross-validation fold
             for item in db.test(fold=fold):
                 # Get feature filename
