@@ -256,6 +256,13 @@ def save_system_output(db, folds, param, log, output_file, mode='dcase'):
                 )
             )
 
+    if len(all_res) == 0:
+        raise ValueError(
+            'There are no results to output into [{output_file}]'.format(
+                output_file=output_file
+            )
+        )
+
     # Convert paths to relative to the dataset root
     for item in all_res:
         item.filename = db.absolute_to_relative_path(item.filename)
