@@ -1044,7 +1044,7 @@ def do_testing(db, scene_labels, folds, param, log, overwrite=False):
                     frame_decisions=frame_decisions
                 )
 
-                # Collect class wise probabilities and scale them betweem [0-1]
+                # Collect class wise probabilities and scale them between [0-1]
                 class_probabilities = {}
                 for scene_id, scene_label in enumerate(scene_labels):
                     class_probabilities[scene_label] = probabilities[scene_id] / input_data.shape[0] 
@@ -1060,7 +1060,11 @@ def do_testing(db, scene_labels, folds, param, log, overwrite=False):
                 res.append(
                     res_data
                 )
+
                 processed_files.append(item.filename)
+
+            if not len(res):
+                raise ValueError('No results to save.')
 
             # Save results container
             fields = ['filename', 'scene_label']
